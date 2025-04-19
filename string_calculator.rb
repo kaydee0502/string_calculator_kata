@@ -2,13 +2,14 @@ class StringCalculator
   DEFAULT_DELIMITER = ','
 
   def initialize(input)
-    @input = input
+    @numbers = input
     @delimiter = DEFAULT_DELIMITER
-    @numbers = parse_numbers
+    parse_input
   end
 
   def add
-    return 0 if @input.empty?
+    check_for_negative_numbers
+    return 0 if @numbers.empty?
 
     @numbers.inject(:+)
   rescue ArgumentError => e
@@ -16,23 +17,20 @@ class StringCalculator
     0
   end
 
-  def parse_numbers
+  def parse_input
     check_and_apply_custom_delimiter
 
-    cleansed_input = process_new_lines
-    cleansed_input = cleansed_input.split(@delimiter).map(&:to_i)
-    check_for_negative_numbers(cleansed_input)
-
-    cleansed_input
+    process_new_lines
+    @numbers = @numbers.split(@delimiter).map(&:to_i)
   end
 
   def process_new_lines
-    @input.gsub("\n", @delimiter)
+    @numbers.gsub!("\n", @delimiter)
   end
 
   def check_and_apply_custom_delimiter
-    if @input.start_with?("//")
-      delimiter_line, *numbers = @input.split("\n")
+    if @numbers.start_with?("//")
+      delimiter_line, *numbers = @numbers.split("\n")
       # Strip out the delimiter indentifier
       delimiter_line = delimiter_line.gsub("//", "").strip
 
@@ -41,8 +39,8 @@ class StringCalculator
     end
   end
 
-  def check_for_negative_numbers(numbers)
-    negative_numbers = numbers.select { |number| number < 0 }
+  def check_for_negative_numbers
+    negative_numbers = @numbers.select { |number| number < 0 }
     raise "Negetive numbers not allowed: #{negative_numbers.join(', ')}" unless negative_numbers.empty?
   end
 

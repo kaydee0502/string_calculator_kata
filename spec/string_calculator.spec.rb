@@ -55,15 +55,15 @@ RSpec.describe StringCalculator do
 
   describe "#add with negative numbers" do
     it 'raises an exception with a message that contains "-1" if "-1" is provided' do
-      expect { StringCalculator.new("-1") }.to raise_exception(RuntimeError, "Negetive numbers not allowed: -1")
+      expect { StringCalculator.new("-1").add }.to raise_exception(RuntimeError, "Negetive numbers not allowed: -1")
     end
 
     it 'raises an exception with a message that contains "-1, -2" if "-1, -2, 3" is provided' do
-      expect { StringCalculator.new("-1, -2, 3") }.to raise_exception(RuntimeError, "Negetive numbers not allowed: -1, -2")
+      expect { StringCalculator.new("-1, -2, 3").add }.to raise_exception(RuntimeError, "Negetive numbers not allowed: -1, -2")
     end
 
     it 'raises an exception with a message that contains "-1, -2" if "//;\n-1;-2;3" is provided' do
-      expect { StringCalculator.new("//;\n-1;-2;3") }.to raise_exception(RuntimeError, "Negetive numbers not allowed: -1, -2")
+      expect { StringCalculator.new("//;\n-1;-2;3").add }.to raise_exception(RuntimeError, "Negetive numbers not allowed: -1, -2")
     end
   end
 end
