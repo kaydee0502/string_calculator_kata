@@ -17,6 +17,11 @@ class StringCalculator
   end
 
   def parse_numbers
-    @input.split(@delimiter).map(&:to_i)
+    cleansed_input = process_new_lines
+    cleansed_input.split(@delimiter).map(&:to_i)
+  end
+
+  def process_new_lines
+    @input.gsub("\n", @delimiter)
   end
 end

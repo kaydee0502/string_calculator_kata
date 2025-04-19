@@ -25,5 +25,13 @@ RSpec.describe StringCalculator do
     it 'returns 5 if "1,1\n1,1,0,1" is passed' do
       expect("1,1\n1,1,0,1").to adds_to(5)
     end
+
+    it 'returns 6 if "1,1,1\n1,1\n0,1\n" is passed' do
+      expect("1,1,1\n1,1\n0,1\n").to adds_to(6)
+    end
+
+    it 'return 56 if "5,20\n26,5" is passed' do
+      expect("5,20\n26,5").to adds_to(56)
+    end
   end
 end
