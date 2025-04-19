@@ -11,7 +11,7 @@ class StringCalculator
     check_for_negative_numbers
     return 0 if @input.empty?
 
-    @input.inject(:+)
+    @input.reject { |number| number > 1000 }.inject(:+)
   rescue ArgumentError => e
     puts e.message
     0
