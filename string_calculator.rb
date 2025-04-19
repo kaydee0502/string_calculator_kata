@@ -17,6 +17,8 @@ class StringCalculator
     0
   end
 
+  private
+
   def parse_input
     check_and_apply_custom_delimiter
 
