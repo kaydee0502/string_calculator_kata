@@ -34,4 +34,10 @@ RSpec.describe StringCalculator do
       expect("5,20\n26,5").to adds_to(56)
     end
   end
+
+  describe "#add numbers with custom delimiter" do
+    it 'returns 14 if "//;\n1;1;11;0;1" is passed' do
+      expect("//;\n1;1;11;0;1").to adds_to(14)
+    end
+  end
 end
