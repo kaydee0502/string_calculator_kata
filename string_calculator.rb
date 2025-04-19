@@ -20,7 +20,10 @@ class StringCalculator
     check_and_apply_custom_delimiter
 
     cleansed_input = process_new_lines
-    cleansed_input.split(@delimiter).map(&:to_i)
+    cleansed_input = cleansed_input.split(@delimiter).map(&:to_i)
+    check_for_negative_numbers(cleansed_input)
+
+    cleansed_input
   end
 
   def process_new_lines
@@ -36,6 +39,11 @@ class StringCalculator
       raise "Invalid delimiter" unless valid_delimiter?(delimiter_line)
       set_delimiter delimiter_line
     end
+  end
+
+  def check_for_negative_numbers(numbers)
+    negative_numbers = numbers.select { |number| number < 0 }
+    raise "Negetive numbers not allowed: #{negative_numbers.join(', ')}" unless negative_numbers.empty?
   end
 
   # Check if the delimiter is a valid integer, if yes then it is no t a valid delimiter
