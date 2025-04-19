@@ -30,10 +30,17 @@ class StringCalculator
   def check_and_apply_custom_delimiter
     if @input.start_with?("//")
       delimiter_line, *numbers = @input.split("\n")
-
       # Strip out the delimiter indentifier
-      set_delimiter delimiter_line.gsub("//", "").strip
+      delimiter_line = delimiter_line.gsub("//", "").strip
+
+      raise "Invalid delimiter" unless valid_delimiter?(delimiter_line)
+      set_delimiter delimiter_line
     end
+  end
+
+  # Check if the delimiter is a valid integer, if yes then it is no t a valid delimiter
+  def valid_delimiter?(delimiter)
+    !(Integer(delimiter) rescue false)
   end
 
   def set_delimiter(delimiter)

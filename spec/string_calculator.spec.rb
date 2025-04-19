@@ -47,6 +47,10 @@ RSpec.describe StringCalculator do
     it 'returns 6 if "//sep\n1sep5" is passed' do
       expect("//sep\n1sep5").to adds_to(6)
     end
+
+    it 'raise an error if "//2\n12522" is passed' do
+      expect { StringCalculator.new("//2\n12522").add }.to raise_exception(RuntimeError, "Invalid delimiter")
+    end
   end
 
   describe "#add with negative numbers" do
