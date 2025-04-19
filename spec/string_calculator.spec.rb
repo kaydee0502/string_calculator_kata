@@ -7,9 +7,23 @@ RSpec.describe StringCalculator do
     end
   end
 
-  describe '#add' do
+  describe 'basic additions' do
     it 'returns 0 for empty string' do
       expect("").to adds_to(0)
+    end
+
+    it 'returns 3 for "3"' do
+      expect("3").to adds_to(3)
+    end
+
+    it 'returns 5 for "2,3"' do
+      expect("2,3").to adds_to(5)
+    end
+  end
+
+  describe "#add with given new lines" do
+    it 'returns 5 if "1,1\n1,1,0,1" is passed' do
+      expect("1,1\n1,1,0,1").to adds_to(5)
     end
   end
 end
