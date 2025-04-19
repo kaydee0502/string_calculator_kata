@@ -1,15 +1,17 @@
 require_relative '../string_calculator'
 require_relative '../string_calculator'
 RSpec.describe StringCalculator do
+  let(:string_calculator) { StringCalculator.new }
+
   RSpec::Matchers.define :adds_to do |expected|
     match do |string|
-      StringCalculator.new(string).add == expected
+      string_calculator.add(string)== expected
     end
   end
 
   RSpec::Matchers.define :raise_invalid_input do |expected|
     match do |string|
-      expect { StringCalculator.new(string).add }.to raise_exception(RuntimeError, expected)
+      expect { string_calculator.add(string) }.to raise_exception(RuntimeError, expected)
     end
   end
 

@@ -1,13 +1,13 @@
 class StringCalculator
   DEFAULT_DELIMITER = ','
 
-  def initialize(input)
-    @input = input
+  def initialize
     @delimiter = DEFAULT_DELIMITER
-    parse_input
   end
 
-  def add
+  def add(input)
+    parse_input(input)
+
     check_for_negative_numbers
     return 0 if @input.empty?
 
@@ -19,7 +19,8 @@ class StringCalculator
 
   private
 
-  def parse_input
+  def parse_input(input)
+    @input = input
     check_and_apply_custom_delimiter
 
     process_new_lines
