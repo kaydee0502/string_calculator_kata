@@ -39,5 +39,19 @@ RSpec.describe StringCalculator do
     it 'returns 14 if "//;\n1;1;11;0;1" is passed' do
       expect("//;\n1;1;11;0;1").to adds_to(14)
     end
+
+    it 'returns 0 if "//|\n0|0|0\n0" is passed' do
+      expect("//|\n0|0|0\n0").to adds_to(0)
+    end
+
+    it 'returns 6 if "//sep\n1sep5" is passed' do
+      expect("//sep\n1sep5").to adds_to(6)
+    end
+  end
+
+  describe "#add with negative numbers" do
+    it 'raises an exception with a message that contains "-1" if "-1" is provided' do
+      expect { StringCalculator.new("-1") }.to raise_error(RuntimeError, /-1/)
+    end
   end
 end
