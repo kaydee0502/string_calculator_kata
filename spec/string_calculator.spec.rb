@@ -25,6 +25,10 @@ RSpec.describe StringCalculator do
     it 'returns 5 for "2,3"' do
       expect("2,3").to adds_to(5)
     end
+
+    it 'returns 5 for "2,3,1009"' do
+      expect("2,3,1009").to adds_to(5)
+    end
   end
 
   describe "#add with given new lines" do
