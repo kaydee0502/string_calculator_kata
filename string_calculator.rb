@@ -12,7 +12,6 @@ class StringCalculator
 
     check_for_negative_numbers
     return 0 if @input.empty?
-    puts @method
     if @method == 'multiplication'
       multiply
     else
