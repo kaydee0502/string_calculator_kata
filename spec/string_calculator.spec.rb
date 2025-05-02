@@ -84,4 +84,14 @@ RSpec.describe StringCalculator do
       expect("//*\n3*2*0").to results_to(0)
     end
   end
+
+  describe "#add all odd numbers id delimiter is 'o'" do
+    it "return 6 if '//o\n3o3o2' is passed" do
+      expect("//o\n3o3o2").to results_to(6)
+    end
+
+    it "return 15 if '//o\n3o3o9' is passed" do
+      expect("//o\n3o3o9").to results_to(15)
+    end
+  end
 end

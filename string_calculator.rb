@@ -1,10 +1,17 @@
 class StringCalculator
   DEFAULT_DELIMITER = ','
-  DEFAULT_METHOD = 'addition'
+  DEFAULT_ACTION = 'add_numbers'
+  CUSTOM_DELIMITER_ACTION = {
+    '*': {
+      action: 'multiply_numbers'
+    },
+    'o': {
+      action: 'add_odds_numbers'
+    }
+  }.freeze
 
   def initialize
     @delimiter = DEFAULT_DELIMITER
-    @method = DEFAULT_METHOD
   end
 
   def perform(input)
@@ -12,12 +19,10 @@ class StringCalculator
 
     check_for_negative_numbers
     return 0 if @input.empty?
-    if @method == 'multiplication'
-      multiply
-    else
-      # default case scenario
-      add
-    end
+
+    action = CUSTOM_DELIMITER_ACTION[@delimiter.to_sym]&.dig(:action) || DEFAULT_ACTION
+
+    self.send(action)
   rescue ArgumentError => e
     puts e.message
     0
@@ -25,18 +30,21 @@ class StringCalculator
 
   private
 
-  def add
+  def add_numbers
     @input.reject { |number| number > 1000 }.inject(:+)
   end
 
-  def multiply
+  def multiply_numbers
     @input.reject { |number| number > 1000 }.inject(:*)
+  end
+
+  def add_odds_numbers
+    @input.reject { |number| number > 1000 || number % 2 == 0 }.inject(:+)
   end
 
   def parse_input(input)
     @input = input
     identify_delimiter
-    set_method
 
     process_new_lines
     @input = @input.split(@delimiter).map(&:to_i)
@@ -67,10 +75,6 @@ class StringCalculator
   # Check if the delimiter is a valid integer, if yes then it is not a valid delimiter
   def valid_delimiter?(delimiter)
     !(Integer(delimiter) rescue false)
-  end
-
-  def set_method
-    @method = 'multiplication' if @delimiter == '*'
   end
 
   def set_delimiter(delimiter)
